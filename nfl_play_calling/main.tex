@@ -200,35 +200,17 @@ analysis_table <- play_call_compare %>%
 
 \subsection{Pass Advantage Visualization}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.85\textwidth]{figures/pass_advantage_chart.png}
-\caption{Pass Advantage (EPA Difference) by Game Situation}
-\end{figure}
-
 The figure above displays the difference in Expected Points Added (EPA) between passing and running for each game situation. Positive values indicate that passing produces a higher expected value than running, while negative values indicate that running is more efficient.
 
 Several situations show a clear advantage for passing, particularly in longer yardage scenarios. Despite this, teams do not always adjust their play-calling behavior accordingly. This suggests that there may be inefficiencies in how teams balance run and pass decisions based on game context.
 
 \subsection{Horizontal Pass Advantage Chart}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.85\textwidth]{figures/pass_advantage_flip.png}
-\caption{Pass Advantage by Situation}
-\end{figure}
-
 This horizontal bar chart presents the same pass advantage data in a more readable format, allowing for easier comparison across situations. The visualization highlights which specific combinations of down, distance, and field position favor passing or running.
 
 Situations with the largest positive values represent the greatest opportunities for increased passing efficiency, while negative values indicate scenarios where running is the better option. This chart helps clearly identify where strategic adjustments could yield the greatest improvement.
 
 \subsection{Actual Play Calling vs Optimal Strategy}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.85\textwidth]{figures/play_calling_efficiency.png}
-\caption{Actual Play Calling vs Optimal Efficiency}
-\end{figure}
 
 This scatter plot compares actual play-calling tendencies with the measured efficiency of passing versus running. The horizontal axis represents the actual pass rate used by teams, while the vertical axis represents the pass advantage in terms of EPA.
 
@@ -245,6 +227,24 @@ Together, the visualizations reveal meaningful differences between actual NFL pl
 The scatter plot further emphasizes these inefficiencies by identifying situations where teams underutilize passing despite its strategic advantage. These patterns suggest that NFL teams may rely on conservative tendencies rather than fully optimizing decisions based on expected outcomes.
 
 Overall, the results indicate that while teams often make efficient decisions, there remain several game situations where data-driven adjustments to play calling could improve offensive efficiency.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/pass_advantage_chart.png}
+\caption{Pass Advantage (EPA Difference) by Game Situation}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/pass_advantage_flip.png}
+\caption{Pass Advantage by Situation}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/play_calling_efficiency.png}
+\caption{Actual Play Calling vs Optimal Efficiency}
+\end{figure}
 
 \section{Discussion}
 
