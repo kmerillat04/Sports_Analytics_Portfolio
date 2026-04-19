@@ -10,7 +10,7 @@ This repository contains independent study and portfolio projects from my Sports
 |---------|-------------|-------|
 | [NFL Play Calling Optimization](nfl_play_calling) | Analyzes NFL play-calling efficiency using 2023 nflfastR data and Expected Points Added (EPA). | R, nflfastR, LaTeX |
 | [MLB Batting Lineup Optimization](mlb_lineup_optimization) | Uses linear programming to construct an optimized baseball batting order under roster constraints. | Python, PuLP, pandas, LaTeX |
-| [Ohio State Football Offensive Database](ohio-state-football-offensive-database/) | Structured football database for offensive analysis and future modeling | SQL, Python, Database Design |
+| [Ohio State Football Offensive Database](ohio_state_football_offensive_database) | Structured football database for offensive analysis and future modeling | SQL, Python, Database Design |
 
 ## About
 Experience: Huntington baseball stats, Rochester Honkers scouting.
