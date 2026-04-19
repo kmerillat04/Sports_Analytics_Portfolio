@@ -12,10 +12,9 @@ This project uses linear programming to construct an optimized baseball batting 
 
 ## Files
 
-- `main.tex` — LaTeX source for the written report
-- `batting_lineup_optimization_report.pdf` — compiled report
-- `analysis.py` — Python optimization script
-- `README.md` — project overview
+- [LaTeX source for the written report](main.tex)
+- [Full Report PDF](batting_lineup_optimization_report.pdf)
+- [Python optimization script](analysis.py)
 
 ## How to Rebuild
 
