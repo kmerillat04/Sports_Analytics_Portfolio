@@ -10,11 +10,10 @@ This project builds a structured database for Ohio State football offensive data
 - Creates a foundation for future football analytics projects.
 
 ## Files
-- [project overview](README.md)
-- `data/` — raw or cleaned data files
-- `sql/` — SQL scripts, if included
-- `python/` — Python scripts, if included
-- `docs/` — notes or reports, if included
+- [Project overview](README.md)
+- [Description](README.md)
+- [Touchdowns PNG](Touchdowns.png)
+- [YardsPerPlayer PNG](YardsPerPlayer.png)
 
 ## Tools Used
 - SQL
