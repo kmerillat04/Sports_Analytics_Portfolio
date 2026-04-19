@@ -1,0 +1,205 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+
+\title{Batting Lineup Optimization Using Linear Programming}
+\author{Karissa Merillat}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\doublespacing
+
+\begin{abstract}
+This project uses linear programming to construct an optimized baseball batting lineup under realistic roster and defensive constraints. Player offensive value is approximated using wRC+, and the model assigns hitters to lineup spots in a way that maximizes projected offensive output.
+
+The constrained optimal lineup is compared with an unconstrained benchmark to show how defensive requirements affect overall lineup strength. Results suggest that roster limitations create a measurable opportunity cost, especially at positions with lower offensive production.
+
+This analysis demonstrates how optimization can support lineup construction by combining baseball intuition with data-driven decision-making.
+\end{abstract}
+
+\section{Introduction}
+
+Lineup construction is an important decision in baseball operations because the order of hitters can affect run production over the course of a game. While traditional lineup choices often rely on heuristics such as batting average, power, or experience, optimization methods allow analysts to evaluate lineup structure more systematically.
+
+The goal of this project is to determine an optimal batting order under realistic roster constraints. In this model, offensive value is represented by wRC+, which provides a summary of overall offensive production. The model assigns players to batting order positions while ensuring that each lineup spot is filled and that the defensive requirements are satisfied.
+
+\section{Problem Context and Objective}
+
+Baseball lineup decisions involve balancing offensive production with defensive feasibility. A team may have several strong hitters, but those players must still occupy valid defensive roles. This creates a constrained optimization problem rather than a simple ranking exercise.
+
+The objective of this project is to maximize projected offensive output by assigning players to batting order positions. The lineup must satisfy the following requirements:
+
+\begin{itemize}
+    \item Assign exactly one player to each batting order position.
+    \item Allow each player to appear at most once.
+    \item Satisfy defensive positional requirements.
+\end{itemize}
+
+\section{Data Overview}
+
+The analysis uses player-level offensive data from the 2025 Cincinnati Reds roster. Players with at least 100 plate appearances were included to ensure that the sample reflected meaningful offensive contribution. The primary performance metric used in the model was wRC+.
+
+\section{Model Formulation}
+
+Let:
+
+\[
+x_{ij} =
+\begin{cases}
+1 & \text{if player } i \text{ is assigned to batting position } j \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+\subsection*{Objective Function}
+
+\[
+\max \sum_i \sum_j \text{wRC+}_i \cdot x_{ij}
+\]
+
+\subsection*{Constraints}
+
+\textbf{Each lineup slot is filled exactly once:}
+
+\[
+\sum_i x_{ij} = 1 \quad \forall j
+\]
+
+\textbf{Each player appears at most once:}
+
+\[
+\sum_j x_{ij} \leq 1 \quad \forall i
+\]
+
+\textbf{Defensive positional requirements are enforced.}
+
+\section{Python Implementation}
+
+The following Python code was used to construct and solve the optimization model:
+
+\begin{verbatim}
+import pandas as pd
+import pulp
+
+df = pd.read_csv("reds_2025_batting.csv")
+df = df[df["PA"] >= 100].reset_index(drop=True)
+
+positions = list(range(1, 10))
+players = df.index.tolist()
+
+required_positions = {
+    "C": 1,
+    "1B": 1,
+    "2B": 1,
+    "3B": 1,
+    "SS": 1,
+    "OF": 3,
+}
+
+model = pulp.LpProblem("Constrained_Lineup", pulp.LpMaximize)
+
+x = pulp.LpVariable.dicts(
+    "assign",
+    ((i, j) for i in players for j in positions),
+    cat="Binary"
+)
+
+model += pulp.lpSum(
+    df.loc[i, "wRC+"] * x[(i, j)]
+    for i in players
+    for j in positions
+)
+
+for j in positions:
+    model += pulp.lpSum(x[(i, j)] for i in players) == 1
+
+for i in players:
+    model += pulp.lpSum(x[(i, j)] for j in positions) <= 1
+
+for pos, count in required_positions.items():
+    model += pulp.lpSum(
+        x[(i, j)]
+        for i in players
+        for j in positions
+        if df.loc[i, "Position"] == pos
+    ) == count
+
+model.solve()
+\end{verbatim}
+
+\section{Results}
+
+\subsection*{Constrained Optimal Lineup}
+
+\begin{longtable}{cccc}
+\toprule
+Batting Order & Player & Position & wRC+ \\
+\midrule
+1 & Noelvi Marte & OF & 101 \\
+2 & Tyler Stephenson & C & 99 \\
+3 & Elly De La Cruz & SS & 109 \\
+4 & Spencer Steer & 1B & 97 \\
+5 & Austin Hays & OF & 105 \\
+6 & Ke'Bryan Hayes & 3B & 82 \\
+7 & Miguel Andujar & OF & 159 \\
+8 & TJ Friedl & CF & 109 \\
+9 & Gavin Lux & 2B & 102 \\
+\bottomrule
+\end{longtable}
+
+\textbf{Total Projected wRC+: 963}
+
+\subsection*{Unconstrained Optimal Lineup}
+
+\begin{longtable}{cccc}
+\toprule
+Batting Order & Player & Position & wRC+ \\
+\midrule
+1 & Jake Fraley & OF & 98 \\
+2 & Miguel Andujar & OF & 159 \\
+3 & Elly De La Cruz & SS & 109 \\
+4 & Gavin Lux & 2B & 102 \\
+5 & Noelvi Marte & OF & 101 \\
+6 & Austin Hays & OF & 105 \\
+7 & Spencer Steer & 1B & 97 \\
+8 & TJ Friedl & CF & 109 \\
+9 & Tyler Stephenson & C & 99 \\
+\bottomrule
+\end{longtable}
+
+\textbf{Total Projected wRC+: 979}
+
+\subsection*{Difference in Offensive Output}
+
+\[
+979 - 963 = 16
+\]
+
+The constrained model sacrifices 16 wRC+ points because defensive feasibility limits lineup flexibility.
+
+\section{Interpretation}
+
+The results show that positional constraints create a measurable offensive cost. Even when several strong hitters are available, the need to fill specific defensive positions can reduce the total projected strength of the lineup.
+
+This type of optimization does not replace baseball judgment, but it provides a structured way to evaluate tradeoffs in roster construction and batting-order design. It can help identify where a team’s weakest offensive positions are creating the largest lineup inefficiencies.
+
+\section{Limitations and Future Work}
+
+This model uses season-level wRC+ as a proxy for single-game production and does not include matchup effects, handedness splits, or batting-order interaction effects. It also does not simulate full run expectancy across different lineup configurations.
+
+Future work could incorporate projected runs per batting order slot, platoon splits, and position-specific weighting. The model could also be expanded to evaluate multiple lineup scenarios across different opponent types.
+
+\section{Conclusion}
+
+This project demonstrates how linear programming can be used to optimize a baseball batting lineup under realistic constraints. The comparison between constrained and unconstrained lineups shows that defensive requirements can reduce projected offensive output.
+
+Overall, the analysis highlights how optimization can support baseball decision-making by quantifying the cost of roster limitations and identifying opportunities to improve lineup construction.
+
+\end{document}
