@@ -2,19 +2,19 @@
 
 **Karissa Merillat** | BS Sports Analytics, Huntington University | Graduating May 2026
 
-Collection of independent study projects in MLB/NFL analytics. Reports + code using R, Python, SQL, Statcast, nflfastR.
+This repository contains independent study and portfolio projects from my Sports Analytics coursework. The projects focus on baseball and football analysis using Python, R, SQL, LaTeX, and optimization methods.
 
 ## 📋 Projects
 
-| Project | Focus | Tools |
-|---------|-------|-------|
-| [NFL Play Calling](nfl-play-calling/) | Run/pass EPA optimization (2023) | R (nflfastR), LaTeX |
-<!-- Add more rows here -->
+| Project | Description | Tools |
+|---------|-------------|-------|
+| [NFL Play Calling Optimization](nfl-play-calling/) | Analyzes NFL play-calling efficiency using 2023 nflfastR data and Expected Points Added (EPA). | R, nflfastR, LaTeX |
+| [MLB Batting Lineup Optimization](mlb_linear_optimization/) | Uses linear programming to construct an optimized baseball batting order under roster constraints. | Python, PuLP, pandas, LaTeX |
 
 ## About
 Experience: Huntington baseball stats, Rochester Honkers scouting.
 
-[📧 Contact](mailto:karissa.merillat@email.com) | [LinkedIn]() 
+[📧 Contact](mailto:kmerillat04@gmail.com) | [LinkedIn](https://www.linkedin.com/in/karissa-merillat-4566532a3/) 
 
 ---
 Live: \[Current Date: April 2026\]
