@@ -10,7 +10,7 @@ This project analyzes NFL play-calling efficiency using 2023 nflfastR data and E
 - The results suggest there may be opportunities to improve offensive decision-making in certain game contexts.
 
 ## Quick View
-- [Full Report PDF](nfl-play-calling-report.pdf)
+- [Full Report PDF](nfl_play_calling.pdf)
 - [LaTeX Source](main.tex)
 - [Visuals](figures/)
 
