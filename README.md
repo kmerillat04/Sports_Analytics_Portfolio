@@ -8,7 +8,7 @@ This repository contains independent study and portfolio projects from my Sports
 
 | Project | Description | Tools |
 |---------|-------------|-------|
-| [NFL Play Calling Optimization](nfl-play-calling/) | Analyzes NFL play-calling efficiency using 2023 nflfastR data and Expected Points Added (EPA). | R, nflfastR, LaTeX |
+| [NFL Play Calling Optimization](nfl_play_calling) | Analyzes NFL play-calling efficiency using 2023 nflfastR data and Expected Points Added (EPA). | R, nflfastR, LaTeX |
 | [MLB Batting Lineup Optimization](mlb_linear_optimization/) | Uses linear programming to construct an optimized baseball batting order under roster constraints. | Python, PuLP, pandas, LaTeX |
 
 ## About
